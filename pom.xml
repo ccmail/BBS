@@ -45,6 +45,20 @@
                 <version>2.4.5</version>
             </plugin>
         </plugins>
+    <!--<resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <includes>
+                <include>**/*.properties</include>
+                <include>**/*.xml</include>
+                <include>**/*.html</include>
+                <include>static/**</include>
+                <include>templates/**</include>
+            </includes>
+        </resource>
+    </resources>-->
     </build>
+
+
 
 </project>
