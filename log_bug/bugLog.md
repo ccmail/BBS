@@ -51,4 +51,4 @@
     <script src="/js/bootstrap.min.js"></script>
     <!--引入bootstrap文件 end-->
     
-![bug_04](https://user-images.githubusercontent.com/49861575/115586893-a1369080-a2ff-11eb-9d3e-972e2dcb4607.png)
+![bug_04](../log_bug/bug_log_img/bug_04.png)
