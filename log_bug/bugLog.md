@@ -1,34 +1,30 @@
----
-typora-root-url: bug_log_img
----
-
-1.**ÒÑ½â¾ö**µÚÒ»¸öbug,´´½¨SpringBoot,maven²å¼ş´íÎó
+1.**å·²è§£å†³**ç¬¬ä¸€ä¸ªbug,åˆ›å»ºSpringBoot,mavenæ’ä»¶é”™è¯¯
     
-    Î´ÕÒµ½²å¼ş 'org.springframework.boot:spring-boot-maven-plugin
+    æœªæ‰¾åˆ°æ’ä»¶ 'org.springframework.boot:spring-boot-maven-plugin
     
-    ½â¾ö·½Ê½:¼ÓÈë°æ±¾ºÅ<version>2.4.5</version>/**2.4.5ÎªideÍÆ¼ö°æ±¾ºÅ,Ò²ÊÇÎÒÑ¡ÔñµÄspringboot°æ±¾**/
+    è§£å†³æ–¹å¼:åŠ å…¥ç‰ˆæœ¬å·<version>2.4.5</version>/**2.4.5ä¸ºideæ¨èç‰ˆæœ¬å·,ä¹Ÿæ˜¯æˆ‘é€‰æ‹©çš„springbootç‰ˆæœ¬**/
          <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.4.5</version>
          </plugin>
 
-2.**ÒÑ½â¾ö**µÚ¶ş¸öÎÊÌâ,ÒıÈëbootstrapÊ±ÏÂÀ­¿òÎŞ·´Ó¦
+2.**å·²è§£å†³**ç¬¬äºŒä¸ªé—®é¢˜,å¼•å…¥bootstrapæ—¶ä¸‹æ‹‰æ¡†æ— ååº”
     
-    È±Ê§jqueryÎÄ¼ş,bootstrapÒ»ÏµÁĞ²Ù×÷ĞèÒª¼ÓÈëjqueryÒÀÀµ²Å¿ÉÊµÏÖ
+    ç¼ºå¤±jqueryæ–‡ä»¶,bootstrapä¸€ç³»åˆ—æ“ä½œéœ€è¦åŠ å…¥jqueryä¾èµ–æ‰å¯å®ç°
     
-    ½â¾ö·½Ê½:ÔÚÒıÈëbootstrapÇ°ÏÈÒıÈëjqueryÎÄ¼ş
-        <!--ÒıÈëjqueryÎÄ¼ş start-->
+    è§£å†³æ–¹å¼:åœ¨å¼•å…¥bootstrapå‰å…ˆå¼•å…¥jqueryæ–‡ä»¶
+        <!--å¼•å…¥jqueryæ–‡ä»¶ start-->
         <script src="../static/js/jquery-3.6.0.min.js"></script>
-        <!--ÒıÈëjqueryÎÄ¼ş end-->
+        <!--å¼•å…¥jqueryæ–‡ä»¶ end-->
     
-        <!--ÒıÈëbootstrapÎÄ¼ş start-->
+        <!--å¼•å…¥bootstrapæ–‡ä»¶ start-->
         <link rel="stylesheet" href="../static/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="../static/css/bootstrap.min.css">
         <script src="../static/js/bootstrap.min.js"></script>
-        <!--ÒıÈëbootstrapÎÄ¼ş end-->
+        <!--å¼•å…¥bootstrapæ–‡ä»¶ end-->
 
-3.**ÒÑ½â¾ö**µÚÈı¸öÎÊÌâ,Æô¶¯springboot±¨´í
+3.**å·²è§£å†³**ç¬¬ä¸‰ä¸ªé—®é¢˜,å¯åŠ¨springbootæŠ¥é”™
 
     Whitelabel Error Page
     This application has no explicit mapping for /error, so you are seeing this as a fallback.
@@ -36,23 +32,23 @@ typora-root-url: bug_log_img
     Wed Apr 21 22:20:50 CST 2021
     There was an unexpected error (type=Not Found, status=404).
     
-    ½â¾ö·½Ê½:±¨´íÔ­ÒòÊÇ¶Ë¿ÚºÅ±»Õ¼ÓÃ,ÔÚ"src/main/resources/application.properties"ÖĞ¸ü¸Ä¶Ë¿ÚºÅ¼´¿É
+    è§£å†³æ–¹å¼:æŠ¥é”™åŸå› æ˜¯ç«¯å£å·è¢«å ç”¨,åœ¨"src/main/resources/application.properties"ä¸­æ›´æ”¹ç«¯å£å·å³å¯
 
-4.**Î´½â¾ö**µÚËÄ¸öÎÊÌâ,Æô¶¯SpringBootºó,cssÑùÊ½¶ªÊ§
+4.**æœªè§£å†³**ç¬¬å››ä¸ªé—®é¢˜,å¯åŠ¨SpringBootå,cssæ ·å¼ä¸¢å¤±
     
     Failed to load resource: the server responded with a status of 404 () bootstrap.min.css:1
     
-    ÎÊÌâÔ­Òò:springboot·ÃÎÊ¾²Ì¬×ÊÔ´Ê±,Â·¾¶Ç°×ºÖĞÄ¬ÈÏÌí¼ÓÁË"..static"
+    é—®é¢˜åŸå› :springbootè®¿é—®é™æ€èµ„æºæ—¶,è·¯å¾„å‰ç¼€ä¸­é»˜è®¤æ·»åŠ äº†"..static"
     
-    ½â¾ö·½Ê½:É¾µô"..static"
-     <!--ÒıÈëjqueryÎÄ¼ş start-->
+    è§£å†³æ–¹å¼:åˆ æ‰"..static"
+     <!--å¼•å…¥jqueryæ–‡ä»¶ start-->
     <script src="/js/jquery-3.6.0.min.js"></script>
-    <!--ÒıÈëjqueryÎÄ¼ş end-->
+    <!--å¼•å…¥jqueryæ–‡ä»¶ end-->
     
-    <!--ÒıÈëbootstrapÎÄ¼ş start-->
+    <!--å¼•å…¥bootstrapæ–‡ä»¶ start-->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <script src="/js/bootstrap.min.js"></script>
-    <!--ÒıÈëbootstrapÎÄ¼ş end-->
+    <!--å¼•å…¥bootstrapæ–‡ä»¶ end-->
     
-![](../bug_log_img/bug_04.png)
+![bug_04](https://user-images.githubusercontent.com/49861575/115586893-a1369080-a2ff-11eb-9d3e-972e2dcb4607.png)
