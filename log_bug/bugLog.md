@@ -50,6 +50,9 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <script src="/js/bootstrap.min.js"></script>
     <!--引入bootstrap文件 end-->
+![bug_04](../log_bug/bug_log_img/bug_04.png)
+修改测试
+
 
     
 
