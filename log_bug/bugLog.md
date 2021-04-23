@@ -52,7 +52,7 @@
     <!--引入bootstrap文件 end-->
 ![bug_04](../log_bug/bug_log_img/bug_04.png)
 
-4.**已解决**第五个问题,Oauth获取github用户信息失败,失败原因:疑似request请求发送错误,导致获取到response页面内不含有用户信息
+5.**已解决**第五个问题,Oauth获取github用户信息失败,失败原因:疑似request请求发送错误,导致获取到response页面内不含有用户信息
     
     问题原因:github更新了Oauth获取用户的方式, 从在地址中明文传递accessToken变成了在headers中传递accessToken, header后的token中有一个**空格**容易被忽视
     
@@ -68,6 +68,21 @@
     .url("https://api.github.com/user")
     .header("Authorization", "token " + accessToken)
     .build();
+
+6.**已解决**第六个问题,okHttp中,RequestBody废弃了creat方法
+
+原先:
+
+    RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
+
+现在:
+
+    RequestBody body = RequestBody.Companion.create(JSON.toJSONString(accessTokenDTO),mediaType);
+
+7.**未解决**连接github服务器容易超时,疑似github服务器原因
+
+
+
 
     
 

@@ -10,6 +10,7 @@ import com.zzu.bbs.controller.provider.GithubProvider;
 import com.zzu.bbs.dto.AccessTokenDTO;
 import com.zzu.bbs.dto.GithubUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,15 @@ public class OAuthController {
     @Autowired
     private GithubProvider githubProvider;
 
+    @Value("${github.client.id}")
+    private String client_id;
+
+    @Value("${github.client.secret}")
+    private String client_secret;
+
+    @Value("${github.redirect.uri}")
+    private String redirect_uri;
+
     @GetMapping("/callback")
     public String callBack(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state) {
@@ -28,10 +38,10 @@ public class OAuthController {
         accessTokenDTO.setCode(code);
 
         //登录后的回调地址
-        accessTokenDTO.setRedirect_uri("http://localhost:9978/callback");
+        accessTokenDTO.setRedirect_uri(redirect_uri);
         accessTokenDTO.setState(state);
-        accessTokenDTO.setClient_id("ae57014a36b83bddd195");
-        accessTokenDTO.setClient_secret("53653dbfde83a9a27404d6a686ad5ddb18557b69");
+        accessTokenDTO.setClient_id(client_id);
+        accessTokenDTO.setClient_secret(client_secret);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         GithubUser user = githubProvider.getUser(accessToken);
         System.out.println(user.getName());
