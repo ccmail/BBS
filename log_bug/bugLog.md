@@ -34,7 +34,7 @@
     
     解决方式:报错原因是端口号被占用,在"src/main/resources/application.properties"中更改端口号即可
 
-4.**未解决**第四个问题,启动SpringBoot后,css样式丢失
+4.**已解决**第四个问题,启动SpringBoot后,css样式丢失
     
     Failed to load resource: the server responded with a status of 404 () bootstrap.min.css:1
     
@@ -51,8 +51,23 @@
     <script src="/js/bootstrap.min.js"></script>
     <!--引入bootstrap文件 end-->
 ![bug_04](../log_bug/bug_log_img/bug_04.png)
-修改测试
 
+4.**已解决**第五个问题,Oauth获取github用户信息失败,失败原因:疑似request请求发送错误,导致获取到response页面内不含有用户信息
+    
+    问题原因:github更新了Oauth获取用户的方式, 从在地址中明文传递accessToken变成了在headers中传递accessToken, header后的token中有一个**空格**容易被忽视
+    
+原先:
+
+    Request request = new Request.Builder()
+    .url("https://api.github.com/user?access_token=" + accessToken)
+    .build();
+
+现在:
+
+    Request request = new Request.Builder()
+    .url("https://api.github.com/user")
+    .header("Authorization", "token " + accessToken)
+    .build();
 
     
 

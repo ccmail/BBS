@@ -35,6 +35,21 @@
         </dependency>
         <!--引入SpringMVC end-->
 
+        <!--引入okHttp start-->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.9.0</version>
+        </dependency>
+        <!--引入okHttp end-->
+
+        <!--引入fastjson start-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.76</version>
+        </dependency>
+        <!--引入fastjson end-->
     </dependencies>
 
     <build>
@@ -45,20 +60,19 @@
                 <version>2.4.5</version>
             </plugin>
         </plugins>
-    <!--<resources>
-        <resource>
-            <directory>src/main/resources</directory>
-            <includes>
-                <include>**/*.properties</include>
-                <include>**/*.xml</include>
-                <include>**/*.html</include>
-                <include>static/**</include>
-                <include>templates/**</include>
-            </includes>
-        </resource>
-    </resources>-->
+        <!--<resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.html</include>
+                    <include>static/**</include>
+                    <include>templates/**</include>
+                </includes>
+            </resource>
+        </resources>-->
     </build>
-
 
 
 </project>
