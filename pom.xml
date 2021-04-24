@@ -50,6 +50,43 @@
             <version>1.2.76</version>
         </dependency>
         <!--引入fastjson end-->
+
+        <!--引入mybatis start-->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <!--引入mybatis end-->
+
+        <!--引入jdbc start-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <!--引入jdbc end-->
+
+        <!--引入mysql连接 start-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.23</version>
+        </dependency>
+        <!--引入musql连接 end-->
+
+        <!--引入Lombok start-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.6</version>
+        </dependency>
+        <!--引入lombok end-->
+
     </dependencies>
 
     <build>
@@ -60,18 +97,6 @@
                 <version>2.4.5</version>
             </plugin>
         </plugins>
-        <!--<resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.xml</include>
-                    <include>**/*.html</include>
-                    <include>static/**</include>
-                    <include>templates/**</include>
-                </includes>
-            </resource>
-        </resources>-->
     </build>
 
 

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>ZZU-BBS</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <!--引入jquery文件 start-->
     <script src="/js/jquery-3.6.0.min.js"></script>
@@ -39,16 +39,21 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="https://github.com/login/oauth/authorize?client_id=ae57014a36b83bddd195&redirect_uri=http://localhost:9978/callback&scope=user&state=200">登录</a></li>
-                <li class="dropdown">
+
+                <!--使用thymeleaf标签自带的if标签判断session中是否获取到user信息, 获取到后显示用户名称,未获取到显示登录-->
+
+                <li class="dropdown" th:if="${session.user !=null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">我<span class="caret"></span></a>
+                       aria-expanded="false" th:text="${session.user.getName()}"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">消息中心</a></li>
                         <li><a href="#">个人资料</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">退出登录</a></li>
                     </ul>
+                </li>
+                <li th:unless="${session.user!=null}">
+                    <a href="https://github.com/login/oauth/authorize?client_id=ae57014a36b83bddd195&redirect_uri=http://localhost:9978/callback&scope=user&state=200">登录</a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
