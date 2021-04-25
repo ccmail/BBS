@@ -81,6 +81,13 @@
     RequestBody body = RequestBody.Companion.create(JSON.toJSONString(accessTokenDTO),mediaType);
 
 7.**未解决**连接github服务器容易超时,疑似github服务器原因
+    
+    问题描述:javax.net.ssl.SSLException: Read timed out
+            Caused by: java.net.SocketTimeoutException: Read timed out
+            
+            java.net.SocketTimeoutException: connect timed out
+备注:该问题时好时坏,暂未发现具体原因以及规律
+
 
 8.**已解决**mysql驱动依赖引入提示警告 
 

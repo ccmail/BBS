@@ -22,8 +22,8 @@ public class GithubProvider {
 
         OkHttpClient client = new OkHttpClient();
 
-//        RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
-        RequestBody body = RequestBody.Companion.create(JSON.toJSONString(accessTokenDTO),mediaType);
+        RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
+//        RequestBody body = RequestBody.Companion.create(JSON.toJSONString(accessTokenDTO),mediaType);
         Request request = new Request.Builder()
                 .url("https://github.com/login/oauth/access_token")
                 .post(body)
@@ -40,6 +40,7 @@ public class GithubProvider {
             return access_token;
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.println("获取accessToken出错,获取到的accessToken:"+accessTokenDTO);
             System.err.println("===========获取accessToken时出错了,在GithubProvider里===========");
         }
         return null;
@@ -51,7 +52,6 @@ public class GithubProvider {
         Request request = new Request.Builder()
                 .url("https://api.github.com/user")
                 .header("Authorization", "token " + accessToken)
-                .header("accept", "application/json")
                 .build();
         try {
             Response response = client.newCall(request).execute();
@@ -63,6 +63,7 @@ public class GithubProvider {
             return githubUser;
         } catch (IOException e) {
             e.printStackTrace();
+            System.err.println("获取用户信息出错,获取到的用户信息为:"+accessToken);
             System.err.println("===========获取用户信息时出错了,在GithubProvider里============");
         }
         return null;
