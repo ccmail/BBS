@@ -1,0 +1,1 @@
+alter table user add test varchar(256) null;

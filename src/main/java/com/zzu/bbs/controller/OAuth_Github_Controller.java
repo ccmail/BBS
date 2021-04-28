@@ -68,7 +68,7 @@ public class OAuth_Github_Controller {
         System.out.println(githubUser.getBio());
 
         //进行登录状态的判断
-        if (githubUser != null) {
+        if (githubUser != null && githubUser.getId()!=null) {
             //登录成功,获取cookies和session
             User user = new User();
             String token = UUID.randomUUID().toString();

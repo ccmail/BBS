@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>ZZU-BBS</title>
+    <title>发布</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <!--引入jquery文件 start-->
@@ -13,8 +13,19 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <script src="/js/bootstrap.min.js"></script>
     <!--引入bootstrap文件 end-->
+
+    <!--引入自定义的css start-->
+    <link rel="stylesheet" href="/css/bbs.css">
+    <!--引入自定义的css end-->
+
+    <!--引入toastr文件 start-->
+    <link rel="stylesheet" href="/css/toastr.min.css">
+    <script src="/js/toastr.min.js"></script>
+    <script src="/js/toastr_setting.js"></script>
+    <!--引入toastr文件 end-->
 </head>
 <body>
+
 <!--使用bootstrap创建的导航栏 start-->
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -30,7 +41,7 @@
             <a class="navbar-brand" href="#">ZZU-BBS</a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Collect the nav links,  forms,  and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <form class="navbar-form navbar-left">
@@ -46,7 +57,8 @@
                 </li>
 
 
-                <!--使用thymeleaf标签自带的if标签判断session中是否获取到user信息, 获取到后显示用户名称,未获取到显示登录-->
+                <!--使用thymeleaf标签自带的if标签判断session中是否获取到user信息,  获取到后显示用户名称, 未获取到显示登录-->
+
                 <li class="dropdown" th:if="${session.user !=null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown   " role="button" aria-haspopup="true"
                        aria-expanded="false" th:text="${session.user.getName()}"><span class="caret"></span></a>
@@ -66,5 +78,58 @@
 </nav>
 <!--使用bootstrap创建的导航栏 end-->
 
+<!--创建流式布局 start-->
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <form action="/publish" method="post">
+
+                <h3>
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    发表/编辑
+                    <button type="submit" class="btn bg-success btn-publish" id="submit">发表</button>
+                </h3>
+
+                <hr>
+                <div class="form-group">
+                    <label for="title">标题</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="输入你的帖子标题">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">内容</label>
+                    <textarea name="description" id="description" class="form-control" cols="30" rows="7"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="tag">添加标签</label>
+                    <input type="text" class="form-control" id="tag" name="tag" placeholder="为帖子输入标签, 用'#'分隔">
+                </div>
+
+                <div class="alert alert-danger" role="alert" th:text="${error}"></div>
+            </form>
+        </div>
+
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h3>社区发帖指南</h3>
+            <br>
+            <ul>
+                <li>标题: 必填, 简要描述帖子内容</li>
+                <li>内容: 必填, 对标题进行补充, 是你想主要要表达的东西</li>
+                <li>标签: 选填, 添加一个或多个标签, 方便其他人更容易看到一的帖子</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--创建流式布局 end-->
+
 </body>
+
+<script>
+    $('#submit').click(function () {
+
+        toastr.info('info')
+
+    })
+</script>
 </html>
