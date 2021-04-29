@@ -44,6 +44,22 @@ public class PublishController {
             HttpServletRequest request,
             Model model
     ) {
+        model.addAttribute("title", title);
+        model.addAttribute("description", description);
+        model.addAttribute("tag", tag);
+
+
+        if (title == null || title.equals("")) {
+            model.addAttribute("error", "标题不能为空");
+            return "publish";
+        } else if (description == null || description.equals("")) {
+            model.addAttribute("error", "内容不能为空");
+            return "publish";
+        } else if (tag == null || tag.equals("")) {
+            model.addAttribute("error", "开发期间tag不要为空");
+            return "publish";
+        }
+
 
         Posting posting = new Posting();
         posting.setTitle(title);

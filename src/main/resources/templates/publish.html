@@ -93,20 +93,20 @@
                 <hr>
                 <div class="form-group">
                     <label for="title">标题</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="输入你的帖子标题">
+                    <input type="text" class="form-control" id="title" name="title" th:value="${title}" placeholder="输入你的帖子标题">
                 </div>
 
                 <div class="form-group">
                     <label for="description">内容</label>
-                    <textarea name="description" id="description" class="form-control" cols="30" rows="7"></textarea>
+                    <textarea name="description" id="description" class="form-control" th:text="${description}" cols="30" rows="7"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="tag">添加标签</label>
-                    <input type="text" class="form-control" id="tag" name="tag" placeholder="为帖子输入标签, 用'#'分隔">
+                    <input type="text" class="form-control" id="tag" name="tag" th:value=" ${tag}" placeholder="为帖子输入标签, 用'#'分隔">
                 </div>
 
-                <div class="alert alert-danger" role="alert" th:text="${error}"></div>
+                <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error!=null}"></div>
             </form>
         </div>
 
@@ -125,11 +125,24 @@
 
 </body>
 
-<script>
-    $('#submit').click(function () {
+<script th:inline="javascript">
+    /*<![CDATA[*/
 
-        toastr.info('info')
+
+    var userInfo = /*[[${error}]]*/ "test";
+
+    $('#submit').click(function () {
+        if (userInfo) {
+            toastr.error(userInfo);
+        } else {
+            toastr.info("发布成功")
+        }
+
 
     })
+
+    /*]]>*/
+
+
 </script>
 </html>
