@@ -76,7 +76,8 @@ public class OAuth_Github_Controller {
             user.setName(githubUser.getName());
             user.setAccount_id(String.valueOf(githubUser.getId()));
             user.setGmt_create(System.currentTimeMillis());
-            user.setGmt_modify(user.getGmt_modify());
+            user.setGmt_modify(user.getGmt_create());
+            user.setAvatar_url(githubUser.getAvatar_url());
             //用插入数据库的操作代替写入session,即将token写入数据库
             userMapper.insert(user);
 

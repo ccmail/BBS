@@ -61,19 +61,11 @@ public class PublishController {
         }
 
 
-        Posting posting = new Posting();
-        posting.setTitle(title);
-        posting.setDescription(description);
-        posting.setTag(tag);
-        posting.setGmt_create(System.currentTimeMillis());
-        posting.setGmt_modify(posting.getGmt_create());
-
-
 //        开始添加用户id
         User user = null;
 
         Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
+        if (cookies != null && cookies.length != 0) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("token")) {
                     String token_value = cookie.getValue();
@@ -85,25 +77,27 @@ public class PublishController {
                     break;
                 }
             }
-            if (user == null) {
-                model.addAttribute("error", "用户未登录");
-                System.out.println("==============用户未登录====================");
-                return "publish";
-            } else {
-                posting.setCreator(user.getId());
-                postingMapper.create(posting);
-                return "redirect:/";
-
-
-            }
-
         } else {
             model.addAttribute("error", "未获取到cookie信息");
             System.out.println("=================没有获取到cookie信息=======================");
             return "publish";
+        }
 
+        if (user == null) {
+            model.addAttribute("error", "用户未登录");
+            System.out.println("==============用户未登录====================");
+            return "publish";
         }
 
 
+        Posting posting = new Posting();
+        posting.setTitle(title);
+        posting.setDescription(description);
+        posting.setTag(tag);
+        posting.setGmt_create(System.currentTimeMillis());
+        posting.setGmt_modify(posting.getGmt_create());
+        posting.setCreator(user.getId());
+        postingMapper.create(posting);
+        return "redirect:/";
     }
 }

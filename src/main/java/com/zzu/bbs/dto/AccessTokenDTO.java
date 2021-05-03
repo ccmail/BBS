@@ -6,11 +6,9 @@ package com.zzu.bbs.dto;
  * Description: AccessToken的实体类,用于传输数据
  */
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class AccessTokenDTO {
     private String client_id;
     private String client_secret;

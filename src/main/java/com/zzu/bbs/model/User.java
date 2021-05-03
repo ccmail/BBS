@@ -6,11 +6,9 @@ package com.zzu.bbs.model;
  * Description:
  */
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class User {
 
 
@@ -20,4 +18,5 @@ public class User {
     private String token;
     private Long gmt_create;
     private Long gmt_modify;
+    private String avatar_url;
 }

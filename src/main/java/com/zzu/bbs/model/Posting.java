@@ -6,11 +6,9 @@ package com.zzu.bbs.model;
  * Description:
  */
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
+@Data
 public class Posting {
 
     private Integer id;

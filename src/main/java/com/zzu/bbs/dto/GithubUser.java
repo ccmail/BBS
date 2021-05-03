@@ -6,17 +6,13 @@ package com.zzu.bbs.dto;
  * Description:
  */
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class GithubUser {
     private String name;
     private Long id;
     private String bio;
     private String email;
-
+    private String avatar_url;
 }
