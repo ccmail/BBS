@@ -103,7 +103,7 @@
                         <span  th:text="'&bull;&nbsp'+${posting.like_count}+'个赞&nbsp'"></span>
                         <span  th:text="'&bull;&nbsp'+${posting.dislike_count}+'个踩&nbsp'"></span>
                         <span  th:text="'&bull;&nbsp'+${posting.view_count}+'个浏览&nbsp'"></span>
-                        <span  th:text="'&bull;&nbsp'+${#dates.format(posting.gmt_create,'dd MMMM yyyy')}+'前&nbsp'"></span>
+                        <span  th:text="'&bull;&nbsp'+${#dates.format(posting.gmt_create,'yyyy-MM-dd HH:mm')}+'&nbsp'"></span>
 
                     </p>
                 </div>
