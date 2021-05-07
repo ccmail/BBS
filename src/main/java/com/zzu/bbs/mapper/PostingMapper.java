@@ -9,10 +9,16 @@ package com.zzu.bbs.mapper;
 import com.zzu.bbs.model.Posting;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface PostingMapper {
 
     @Insert("Insert into posting (title,description,gmt_create,gmt_modify,creator,tag) values (#{title},#{description},#{gmt_create},#{gmt_modify},#{creator},#{tag})")
     void create(Posting posting);
+
+    @Select("select * from posting")
+    List<Posting> list();
 }

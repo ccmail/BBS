@@ -18,10 +18,11 @@
     <link rel="stylesheet" href="/css/bbs.css">
     <!--引入自定义的css end-->
 
+
     <!--引入toastr文件 start-->
-    <link rel="stylesheet" href="/css/toastr.min.css">
-    <script src="/js/toastr.min.js"></script>
-    <script src="/js/toastr_setting.js"></script>
+    <!--    <link rel="stylesheet" href="/css/toastr.min.css">-->
+    <!--    <script src="/js/toastr.min.js"></script>-->
+    <!--    <script src="/js/toastr_setting.js"></script>-->
     <!--引入toastr文件 end-->
 </head>
 <body>
@@ -38,7 +39,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">ZZU-BBS</a>
+            <a class="navbar-brand" href="/">ZZU-BBS</a>
         </div>
 
         <!-- Collect the nav links,  forms,  and other content for toggling -->
@@ -93,20 +94,27 @@
                 <hr>
                 <div class="form-group">
                     <label for="title">标题</label>
-                    <input type="text" class="form-control" id="title" name="title" th:value="${title}" placeholder="输入你的帖子标题">
+                    <input type="text" class="form-control" id="title" name="title" th:value="${title}"
+                           placeholder="输入你的帖子标题">
                 </div>
 
                 <div class="form-group">
                     <label for="description">内容</label>
-                    <textarea name="description" id="description" class="form-control" th:text="${description}" cols="30" rows="7"></textarea>
+                    <textarea name="description" id="description" class="form-control" th:text="${description}"
+                              cols="30" rows="7"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="tag">添加标签</label>
-                    <input type="text" class="form-control" id="tag" name="tag" th:value=" ${tag}" placeholder="为帖子输入标签, 用'#'分隔">
+                    <input type="text" class="form-control" id="tag" name="tag" th:value=" ${tag}"
+                           placeholder="为帖子输入标签, 用'#'分隔">
                 </div>
 
-                <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error!=null}"></div>
+                <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                    <span th:text="${error}" th:if="${error!=null}"></span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
             </form>
         </div>
 
@@ -125,7 +133,12 @@
 
 </body>
 
-<script th:inline="javascript">
+<!--引入实现警告框关闭功能的js start-->
+<script src="/js/alert.js"></script>
+<!--引入实现警告框关闭功能的js end-->
+
+<!--<script th:inline="javascript">
+    暂时放弃使用toastr
     /*<![CDATA[*/
 
 
@@ -144,5 +157,5 @@
     /*]]>*/
 
 
-</script>
+</script>-->
 </html>

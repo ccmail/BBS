@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <script src="/js/bootstrap.min.js"></script>
     <!--引入bootstrap文件 end-->
+
+    <!--引入全局css配置文件 start-->
+    <link rel="stylesheet" href="/css/bbs.css">
+    <!--引入全局css配置文件 end-->
 </head>
 <body>
 <!--使用bootstrap创建的导航栏 start-->
@@ -27,7 +31,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">ZZU-BBS</a>
+            <a class="navbar-brand" href="/">ZZU-BBS</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -66,5 +70,56 @@
 </nav>
 <!--使用bootstrap创建的导航栏 end-->
 
+
+<!--创建流式布局 start-->
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h3>
+                <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                发现
+            </h3>
+            <hr>
+
+            <!--需要进行循环的显示帖子的模块 start-->
+            <div class="media" th:each="posting : ${postings}">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object img-rounded"
+                             th:src="${posting.user.avatar_url}"
+                        >
+                    </a>
+                </div>
+
+
+
+
+<!--                这里用表格做可能会好点-->
+                <div class="media-body">
+                    <h4 class="media-heading" th:text="${posting.title}"></h4>
+                    <p class="text-desc" >
+<!--                        这里写浏览数,回复数等信息-->
+                        <span  th:text="'&bull;&nbsp'+${posting.comment_count}+'个回复&nbsp'"></span>
+                        <span  th:text="'&bull;&nbsp'+${posting.like_count}+'个赞&nbsp'"></span>
+                        <span  th:text="'&bull;&nbsp'+${posting.dislike_count}+'个踩&nbsp'"></span>
+                        <span  th:text="'&bull;&nbsp'+${posting.view_count}+'个浏览&nbsp'"></span>
+                        <span  th:text="'&bull;&nbsp'+${#dates.format(posting.gmt_create,'dd MMMM yyyy')}+'前&nbsp'"></span>
+
+                    </p>
+                </div>
+
+            </div>
+            <!--需要进行循环的显示帖子的模块 end-->
+
+        </div>
+
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h3>热门话题</h3>
+            <br>
+
+        </div>
+    </div>
+</div>
+<!--创建流式布局 end-->
 </body>
 </html>
