@@ -87,21 +87,22 @@
         </dependency>
         <!--引入lombok end-->
 
-<!--        &lt;!&ndash;引入maven-resources插件 start&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.maven.plugins</groupId>-->
-<!--            <artifactId>maven-resources-plugin</artifactId>-->
-<!--            <version>3.2.0</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash;引入maven-resources插件 end&ndash;&gt;-->
 
-<!--        &lt;!&ndash;引入flyway依赖 start&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.flywaydb</groupId>-->
-<!--            <artifactId>flyway-core</artifactId>-->
-<!--            <version>7.8.1</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash;引入flyway依赖 end&ndash;&gt;-->
+        <!--        &lt;!&ndash;引入maven-resources插件 start&ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.maven.plugins</groupId>-->
+        <!--            <artifactId>maven-resources-plugin</artifactId>-->
+        <!--            <version>3.2.0</version>-->
+        <!--        </dependency>-->
+        <!--        &lt;!&ndash;引入maven-resources插件 end&ndash;&gt;-->
+
+        <!--        &lt;!&ndash;引入flyway依赖 start&ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.flywaydb</groupId>-->
+        <!--            <artifactId>flyway-core</artifactId>-->
+        <!--            <version>7.8.1</version>-->
+        <!--        </dependency>-->
+        <!--        &lt;!&ndash;引入flyway依赖 end&ndash;&gt;-->
 
 
     </dependencies>
@@ -115,28 +116,27 @@
             </plugin>
 
 
-
-<!--            &lt;!&ndash;引入flyway插件,用于数据库自动更新与其版本控制 start&ndash;&gt;-->
-<!--            <plugin>-->
-<!--                <groupId>org.flywaydb</groupId>-->
-<!--                <artifactId>flyway-maven-plugin</artifactId>-->
-<!--                <version>7.8.2</version>-->
-<!--                &lt;!&ndash;配置连接数据库的地址,用户名,密码 start&ndash;&gt;-->
-<!--                <configuration>-->
-<!--                    <url>jdbc:mysql://localhost:3306/bbs</url>-->
-<!--                    <user>root</user>-->
-<!--                    <password>123456</password>-->
-<!--                </configuration>-->
-<!--                <dependencies>-->
-<!--                    <dependency>-->
-<!--                        <groupId>mysql</groupId>-->
-<!--                        <artifactId>mysql-connector-java</artifactId>-->
-<!--                        <version>8.0.23</version>-->
-<!--                    </dependency>-->
-<!--                </dependencies>-->
-<!--                &lt;!&ndash;配置连接数据库的地址,用户名,密码 emd&ndash;&gt;-->
-<!--            </plugin>-->
-<!--            &lt;!&ndash;引入flyway插件,用于数据库自动更新与其版本控制 end&ndash;&gt;-->
+            <!--            &lt;!&ndash;引入flyway插件,用于数据库自动更新与其版本控制 start&ndash;&gt;-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.flywaydb</groupId>-->
+            <!--                <artifactId>flyway-maven-plugin</artifactId>-->
+            <!--                <version>7.8.2</version>-->
+            <!--                &lt;!&ndash;配置连接数据库的地址,用户名,密码 start&ndash;&gt;-->
+            <!--                <configuration>-->
+            <!--                    <url>jdbc:mysql://localhost:3306/bbs</url>-->
+            <!--                    <user>root</user>-->
+            <!--                    <password>123456</password>-->
+            <!--                </configuration>-->
+            <!--                <dependencies>-->
+            <!--                    <dependency>-->
+            <!--                        <groupId>mysql</groupId>-->
+            <!--                        <artifactId>mysql-connector-java</artifactId>-->
+            <!--                        <version>8.0.23</version>-->
+            <!--                    </dependency>-->
+            <!--                </dependencies>-->
+            <!--                &lt;!&ndash;配置连接数据库的地址,用户名,密码 emd&ndash;&gt;-->
+            <!--            </plugin>-->
+            <!--            &lt;!&ndash;引入flyway插件,用于数据库自动更新与其版本控制 end&ndash;&gt;-->
 
 
         </plugins>

@@ -102,6 +102,17 @@
 
 9.**未解决**获取不到gmt_modify
 
+10.**已解决**JRebel热部署插件启动失败
+
+问题描述:
+
+    JRebel-JVMTI [FATAL] Couldn't write to C:\Users
+    JRebel启动路径无法识别路径中的中文
+
+解决方式:
+
+    更改idea VM配置文件, 详见博客https://blog.csdn.net/sweet_chu/article/details/102838558?utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control
+
     
 
 
