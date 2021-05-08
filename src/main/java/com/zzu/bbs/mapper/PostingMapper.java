@@ -20,5 +20,5 @@ public interface PostingMapper {
     void create(Posting posting);
 
     @Select("select * from posting")
-    List<Posting> list();
+    List<Posting> selectAllPosting();
 }

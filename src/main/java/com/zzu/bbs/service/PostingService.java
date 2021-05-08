@@ -6,6 +6,8 @@ package com.zzu.bbs.service;
  * Description:用于组装Posting和User的中间层
  */
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zzu.bbs.dto.PostingDTO;
 import com.zzu.bbs.mapper.PostingMapper;
 import com.zzu.bbs.mapper.UserMapper;
@@ -26,8 +28,8 @@ public class PostingService {
     @Autowired
     private UserMapper userMapper;
 
-    public List<PostingDTO> list() {
-        List<Posting> postings = postingMapper.list();
+    public List<PostingDTO> getAllPostingList() {
+        List<Posting> postings = postingMapper.selectAllPosting();
         List<PostingDTO> postingDTOList = new ArrayList<>();
 //        每层for循环将整合好的posting信息和对应的user信息装到List中
         for (Posting posting : postings) {
@@ -38,6 +40,17 @@ public class PostingService {
             postingDTO.setUser(user);
             postingDTOList.add(postingDTO);
         }
+
         return postingDTOList;
     }
+
+    public List<PostingDTO> findPage(int page, int pageSize) {
+        PageHelper.startPage(page, pageSize);
+        List<PostingDTO> postingDTOS = getAllPostingList();
+        PageInfo<PostingDTO> pageInfo = new PageInfo<>(postingDTOS);
+
+        return pageInfo.getList();
+    }
+
+
 }

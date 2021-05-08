@@ -11,6 +11,7 @@ import com.zzu.bbs.mapper.UserMapper;
 import com.zzu.bbs.model.User;
 import com.zzu.bbs.service.PostingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,14 @@ public class IndexController {
 
     @Autowired
     private PostingService postingService;
+
+    @Value("${myPageHelper.config.startPage}")
+    private int page;
+
+    @Value("${myPageHelper.config.pageSize}")
+    private int pageSize;
+
+
 
     @GetMapping("/")
     public String index(HttpServletRequest request,
@@ -47,7 +56,7 @@ public class IndexController {
         }
 
 //用cookies检查登陆状态, 在return前进行数据查询, 获取列表信息
-        List<PostingDTO> postingList = postingService.list();
+        List<PostingDTO> postingList = postingService.findPage(page,pageSize);
         model.addAttribute("postings",postingList);
         return "index";
     }
