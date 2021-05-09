@@ -58,12 +58,11 @@ public class IndexController {
         }
 
 //用cookies检查登陆状态, 在return前进行数据查询, 获取列表信息
-        PageHelper.startPage(page,pageSize);
         PageInfo<PostingDTO> pageInfo = postingService.getPageInfo(page, pageSize);
         List<PostingDTO> postingList = pageInfo.getList();
-        int PageCount = pageInfo.getPages();
-        model.addAttribute("pageCount",PageCount);
+        int pageCount = pageInfo.getPages();
         model.addAttribute("postings",postingList);
+        model.addAttribute("pageCount",pageCount);
         return "index";
     }
 }

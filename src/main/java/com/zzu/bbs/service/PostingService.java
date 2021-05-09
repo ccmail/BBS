@@ -15,7 +15,6 @@ import java.util.List;
 @Service
 public interface PostingService {
 
-    List<PostingDTO> getPageList();
 
     PageInfo<PostingDTO> getPageInfo(int pageNum, int pageSize);
 

@@ -17,10 +17,12 @@ import com.zzu.bbs.service.PostingService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class PostingServiceImpl implements PostingService {
 
     @Autowired
@@ -29,9 +31,15 @@ public class PostingServiceImpl implements PostingService {
     @Autowired
     private UserMapper userMapper;
 
+    @NotNull
     @Override
-    public List<PostingDTO> getPageList() {
+    public PageInfo<PostingDTO> getPageInfo(int pageNum, int pageSize) {
+
+
+        PageHelper.startPage(pageNum, pageSize);
         List<Posting> postings = postingMapper.selectAllPosting();
+        PageInfo postingPageInfo = new PageInfo(postings);
+
         List<PostingDTO> postingDTOList = new ArrayList<>();
 
         for (Posting posting : postings) {
@@ -41,15 +49,9 @@ public class PostingServiceImpl implements PostingService {
             postingDTO.setUser(user);
             postingDTOList.add(postingDTO);
         }
-        return postingDTOList;
-    }
 
-    @NotNull
-    @Override
-    public PageInfo<PostingDTO> getPageInfo(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        List<PostingDTO> pageList = getPageList();
-        PageInfo<PostingDTO> pageInfo = new PageInfo<>(pageList);
-        return pageInfo;
+        postingPageInfo.setList(postingDTOList);
+
+        return postingPageInfo;
     }
 }

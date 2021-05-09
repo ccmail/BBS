@@ -113,6 +113,11 @@
 
     更改idea VM配置文件, 详见博客https://blog.csdn.net/sweet_chu/article/details/102838558?utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control
 
-    
+11.**已解决**pageHelper获取页面总数pages得到值始终为1
+
+问题描述: 从数据库中查询到数据后, 因为对数据进行了封装的操作, 导致pageHelper返回数据失败, 详见博客 [点这里跳转](https://blog.csdn.net/qq1445654576/article/details/108545994)
+
+解决方式: 详见博客 [点这里跳转](https://blog.csdn.net/qq_45376627/article/details/114453910)
+
 
 
