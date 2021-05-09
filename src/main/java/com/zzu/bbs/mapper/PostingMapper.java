@@ -10,6 +10,7 @@ import com.zzu.bbs.model.Posting;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface PostingMapper {
 
     @Select("select * from posting")
     List<Posting> selectAllPosting();
+
+
 }

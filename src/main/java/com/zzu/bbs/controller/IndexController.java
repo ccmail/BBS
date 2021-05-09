@@ -6,6 +6,8 @@ package com.zzu.bbs.controller;
  * Description:第一个SpringMvc类,该文件用于将请求的信息添加到model中, 返回给GetMapping对应的html模板页面
  */
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zzu.bbs.dto.PostingDTO;
 import com.zzu.bbs.mapper.UserMapper;
 import com.zzu.bbs.model.User;
@@ -56,7 +58,11 @@ public class IndexController {
         }
 
 //用cookies检查登陆状态, 在return前进行数据查询, 获取列表信息
-        List<PostingDTO> postingList = postingService.findPage(page,pageSize);
+        PageHelper.startPage(page,pageSize);
+        PageInfo<PostingDTO> pageInfo = postingService.getPageInfo(page, pageSize);
+        List<PostingDTO> postingList = pageInfo.getList();
+        int PageCount = pageInfo.getPages();
+        model.addAttribute("pageCount",PageCount);
         model.addAttribute("postings",postingList);
         return "index";
     }
