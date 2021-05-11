@@ -91,19 +91,16 @@
                     </a>
                 </div>
 
-
-
-
-<!--                这里用表格做可能会好点-->
+                <!--                这里用表格做可能会好点-->
                 <div class="media-body">
                     <h4 class="media-heading" th:text="${posting.title}"></h4>
-                    <p class="text-desc" >
-<!--                        这里写浏览数,回复数等信息-->
-                        <span  th:text="'&bull;&nbsp'+${posting.comment_count}+'个回复&nbsp'"></span>
-                        <span  th:text="'&bull;&nbsp'+${posting.like_count}+'个赞&nbsp'"></span>
-                        <span  th:text="'&bull;&nbsp'+${posting.dislike_count}+'个踩&nbsp'"></span>
-                        <span  th:text="'&bull;&nbsp'+${posting.view_count}+'个浏览&nbsp'"></span>
-                        <span  th:text="'&bull;&nbsp'+${#dates.format(posting.gmt_create,'yyyy-MM-dd HH:mm')}+'&nbsp'"></span>
+                    <p class="text-desc">
+                        <!--                        这里写浏览数,回复数等信息-->
+                        <span th:text="'&bull;&nbsp'+${posting.comment_count}+'个回复&nbsp'"></span>
+                        <span th:text="'&bull;&nbsp'+${posting.like_count}+'个赞&nbsp'"></span>
+                        <span th:text="'&bull;&nbsp'+${posting.dislike_count}+'个踩&nbsp'"></span>
+                        <span th:text="'&bull;&nbsp'+${posting.view_count}+'个浏览&nbsp'"></span>
+                        <span th:text="'&bull;&nbsp'+${#dates.format(posting.gmt_create,'yyyy-MM-dd HH:mm')}+'&nbsp'"></span>
 
                     </p>
                 </div>
@@ -111,12 +108,60 @@
             </div>
             <!--需要进行循环的显示帖子的模块 end-->
 
+            <!--引入分页样式 start            -->
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+
+                    <!--这里写首页 start-->
+                    <li th:if="${pageInfo.getPrePage()}">
+                        <a href="/?page=1" aria-label="Previous">
+                            <span aria-hidden="true">首页</span>
+                        </a>
+                    </li>
+                    <!--这里写首页 end-->
+
+                    <!--这里写上一页 start-->
+                    <li th:if="${pageInfo.getPrePage()}">
+                        <a href="#"  th:href="@{/(page=${pageInfo.getPrePage()})}" aria-label="Previous">
+                            <span aria-hidden="true">上一页</span>
+                        </a>
+                    </li>
+                    <!--这里写上一页 end-->
+
+                    <!--这里循环展示下方的页码数 start-->
+                    <li th:each="page:${pageInfo.navigatepageNums}"
+                        th:class="${pageInfo.getPageNum()==page}?'active':''">
+                        <a href="#" th:href="@{/(page=${page})}" th:text="${page}">1</a>
+                    </li>
+                    <!--这里循环展示下方的页码数 end-->
+
+                    <!--这里写下一页 start-->
+                    <li>
+                        <a href="#"  th:href="@{/(page=${pageInfo.getNextPage()})}" aria-label="Next">
+                            <span aria-hidden="true">下一页</span>
+                        </a>
+                    </li>
+                    <!--这里写下一页 end-->
+
+                    <!--这里写尾页 start-->
+                    <li>
+                        <a href="#" th:href="@{/(page=${pageInfo.getPages()})}" aria-label="Next">
+                            <span aria-hidden="true">尾页</span>
+                        </a>
+                    </li>
+                    <!--这里写尾页 end-->
+
+                </ul>
+            </nav>
+            <!--引入分页样式 end            -->
+
         </div>
+
 
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <h3>热门话题</h3>
             <br>
-            <p th:text="${pageCount}">测试分页页数</p>
+            <p th:text="${pageInfo.getPages()}">测试分页页数</p>
 
         </div>
     </div>
