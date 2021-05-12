@@ -7,7 +7,6 @@ package com.zzu.bbs.controller;
  */
 
 import com.zzu.bbs.mapper.PostingMapper;
-import com.zzu.bbs.mapper.UserMapper;
 import com.zzu.bbs.model.Posting;
 import com.zzu.bbs.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -26,9 +24,6 @@ public class PublishController {
     //    自动将前端传回的参数注入到实体变量中
     @Autowired
     private PostingMapper postingMapper;
-
-    @Autowired
-    private UserMapper userMapper;
 
     @GetMapping("/publish")
     public String publish() {
@@ -62,30 +57,9 @@ public class PublishController {
 
 
 //        开始添加用户id
-        User user = null;
-
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null && cookies.length != 0) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("token")) {
-                    String token_value = cookie.getValue();
-                    user = userMapper.findByToken(token_value);
-                    if (user != null) {
-                        request.getSession().setAttribute("user", user);
-                    }
-
-                    break;
-                }
-            }
-        } else {
-            model.addAttribute("error", "未获取到cookie信息");
-            System.out.println("=================没有获取到cookie信息=======================");
-            return "publish";
-        }
-
+        User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             model.addAttribute("error", "用户未登录");
-            System.out.println("==============用户未登录====================");
             return "publish";
         }
 

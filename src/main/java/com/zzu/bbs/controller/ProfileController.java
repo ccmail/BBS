@@ -8,7 +8,6 @@ package com.zzu.bbs.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.zzu.bbs.dto.PostingDTO;
-import com.zzu.bbs.mapper.UserMapper;
 import com.zzu.bbs.model.User;
 import com.zzu.bbs.service.PostingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +18,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
 public class ProfileController {
-
-    @Autowired
-    private UserMapper userMapper;
 
     @Autowired
     private PostingService postingService;
@@ -42,21 +37,8 @@ public class ProfileController {
                           HttpServletRequest request,
                           @RequestParam(name = "page", defaultValue = "1") Integer pageStart) {
 
-        User user = null;
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null && cookies.length != 0) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("token")) {
-                    String token_value = cookie.getValue();
-                    user = userMapper.findByToken(token_value);
-                    if (user != null) {
-                        request.getSession().setAttribute("user", user);
-                    }
 
-                    break;
-                }
-            }
-        }
+        User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             return "redirect:/";
         }
