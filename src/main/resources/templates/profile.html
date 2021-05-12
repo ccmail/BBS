@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>ZZU-BBS</title>
+    <title th:text="${sectionName}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <!--引入jquery文件 start-->
@@ -29,8 +29,8 @@
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <h3>
-                <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                发现
+                <span th:text="${sectionName}">
+                </span>
             </h3>
             <hr>
 
@@ -59,6 +59,7 @@
                 </div>
 
             </div>
+
             <!--需要进行循环的显示帖子的模块 end-->
 
             <!--引入分页样式 start            -->
@@ -67,7 +68,7 @@
 
                     <!--这里写首页 start-->
                     <li th:if="${pageInfo.getPrePage()}">
-                        <a href="/?page=1" aria-label="Previous">
+                        <a th:href="@{'/profile/'+${section}(page=${1})}" aria-label="Previous">
                             <span aria-hidden="true">首页</span>
                         </a>
                     </li>
@@ -75,7 +76,7 @@
 
                     <!--这里写上一页 start-->
                     <li th:if="${pageInfo.getPrePage()}">
-                        <a href="#" th:href="@{/(page=${pageInfo.getPrePage()})}" aria-label="Previous">
+                        <a href="#" th:href="@{'/profile/'+${section}(page=${pageInfo.getPrePage()})}" aria-label="Previous">
                             <span aria-hidden="true">上一页</span>
                         </a>
                     </li>
@@ -84,23 +85,21 @@
                     <!--这里循环展示下方的页码数 start-->
                     <li th:each="page:${pageInfo.navigatepageNums}"
                         th:class="${pageInfo.getPageNum()==page}?'active':''">
-                        <a href="#" th:href="@{/(page=${page})}" th:text="${page}">1</a>
+                        <a href="#" th:href="@{'/profile/'+${section}(page=${page})}" th:text="${page}">1</a>
                     </li>
                     <!--这里循环展示下方的页码数 end-->
 
                     <!--这里写下一页 start-->
-                    <li  th:if="${pageInfo.getNextPage()}" >
-                        <a href="#"th:href="@{/(page=${pageInfo.getNextPage()})}"
-                           aria-label="Next">
+                    <li th:if="${pageInfo.getNextPage()}">
+                        <a href="#" th:href="@{'/profile/'+${section}(page=${pageInfo.getNextPage()})}" aria-label="Next">
                             <span aria-hidden="true">下一页</span>
                         </a>
                     </li>
                     <!--这里写下一页 end-->
 
                     <!--这里写尾页 start-->
-                    <li th:if="${pageInfo.getNextPage()}" >
-                        <a href="#" th:href="@{/(page=${pageInfo.getPages()})}"
-                           aria-label="Next">
+                    <li th:if="${pageInfo.getNextPage()}">
+                        <a href="#" th:href="@{'/profile/'+${section}(page=${pageInfo.getPages()})}" aria-label="Next">
                             <span aria-hidden="true">尾页</span>
                         </a>
                     </li>
@@ -108,15 +107,22 @@
 
                 </ul>
             </nav>
+
             <!--引入分页样式 end            -->
 
         </div>
 
 
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h3>热门话题</h3>
-            <br>
-            <p th:text="${pageInfo.getPages()}">测试分页页数</p>
+            <div class="list-group">
+                <a href="/profile/postings" th:class="${section=='postings'}?'list-group-item list-group-item-info':'list-group-item'">我的帖子</a>
+                <a href="/profile/replies" th:class="${section=='replies'}?'list-group-item list-group-item-info':'list-group-item'">
+                    <span class="badge">14</span>
+                    最新回复
+                </a>
+                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                <a href="#" class="list-group-item">Vestibulum at eros</a>
+            </div>
 
         </div>
     </div>

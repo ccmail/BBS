@@ -7,10 +7,7 @@ package com.zzu.bbs.mapper;
  */
 
 import com.zzu.bbs.model.Posting;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -22,6 +19,9 @@ public interface PostingMapper {
 
     @Select("select * from posting")
     List<Posting> selectAllPosting();
+
+    @Select("select * from posting where creator=#{userId}")
+    List<Posting> selectAllPostingByUser(@Param("userId") Integer userId);
 
 
 }

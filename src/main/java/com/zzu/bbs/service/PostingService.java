@@ -16,6 +16,8 @@ import java.util.List;
 public interface PostingService {
 
 
+    PageInfo<PostingDTO> getPageInfo(Integer id, Integer pageStart, int pageSize) ;
+
     PageInfo<PostingDTO> getPageInfo(int pageNum, int pageSize);
 
 }

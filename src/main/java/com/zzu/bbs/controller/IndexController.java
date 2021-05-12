@@ -6,7 +6,6 @@ package com.zzu.bbs.controller;
  * Description:第一个SpringMvc类,该文件用于将请求的信息添加到model中, 返回给GetMapping对应的html模板页面
  */
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zzu.bbs.dto.PostingDTO;
 import com.zzu.bbs.mapper.UserMapper;
@@ -32,9 +31,6 @@ public class IndexController {
     @Autowired
     private PostingService postingService;
 
-    @Value("${myPageHelper.config.startPage}")
-    private int pageStart;
-
     @Value("${myPageHelper.config.pageSize}")
     private int pageSize;
 
@@ -43,8 +39,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(HttpServletRequest request,
                         Model model,
-                        @RequestParam(name = "page",defaultValue = "1")Integer page,
-                        @RequestParam(name = "page",defaultValue = "10")Integer size) {
+                        @RequestParam(name = "page",defaultValue = "1")Integer pageStart) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null && cookies.length != 0) {
             for (Cookie cookie : cookies) {
@@ -61,7 +56,7 @@ public class IndexController {
         }
 
 //用cookies检查登陆状态, 在return前进行数据查询, 获取列表信息
-        PageInfo<PostingDTO> pageInfo = postingService.getPageInfo(page, pageSize);
+        PageInfo<PostingDTO> pageInfo = postingService.getPageInfo(pageStart, pageSize);
         List<PostingDTO> postingList = pageInfo.getList();
         model.addAttribute("postings",postingList);
         model.addAttribute("pageInfo",pageInfo);
