@@ -37,10 +37,10 @@
             <p class="text-desc col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <!--                        这里写浏览数,回复数等信息-->
                 <span th:text="'作者:&nbsp'+${posting.user.name}+'&nbsp'"></span>
-                <span th:text="'&#124;&nbsp'+'赞:&nbsp'+${posting.like_count}+'&nbsp'"></span>
-                <span th:text="'&#124;&nbsp'+'踩:&nbsp'+${posting.dislike_count}+'&nbsp'"></span>
-                <span th:text="'&#124;&nbsp'+'浏览数:&nbsp'+${posting.view_count}+'&nbsp'"></span>
-                <span th:text="'&#124;&nbsp'+'发布时间:&nbsp'+${#dates.format(posting.gmt_create,'yyyy-MM-dd HH:mm')}+'&nbsp'"></span>
+                <span th:text="'&#124;&nbsp'+'赞:&nbsp'+${posting.likeCount}+'&nbsp'"></span>
+                <span th:text="'&#124;&nbsp'+'踩:&nbsp'+${posting.dislikeCount}+'&nbsp'"></span>
+                <span th:text="'&#124;&nbsp'+'浏览数:&nbsp'+${posting.viewCount}+'&nbsp'"></span>
+                <span th:text="'&#124;&nbsp'+'发布时间:&nbsp'+${#dates.format(posting.gmtCreate,'yyyy-MM-dd HH:mm')}+'&nbsp'"></span>
             </p>
             <!--帖子数据 end-->
 
@@ -66,7 +66,7 @@
                     <div class="media-left">
                         <a href="#">
                             <img class="media-object img-rounded"
-                                 th:src="${posting.user.avatar_url}"
+                                 th:src="${posting.user.avatarUrl}"
                             >
                         </a>
                     </div>

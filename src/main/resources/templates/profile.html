@@ -39,7 +39,7 @@
                 <div class="media-left">
                     <a href="#">
                         <img class="media-object img-rounded"
-                             th:src="${posting.user.avatar_url}"
+                             th:src="${posting.user.avatarUrl}"
                         >
                     </a>
                 </div>
@@ -49,11 +49,11 @@
                     <h4 class="media-heading" th:text="${posting.title}"></h4>
                     <p class="text-desc">
                         <!--                        这里写浏览数,回复数等信息-->
-                        <span th:text="'&bull;&nbsp'+${posting.comment_count}+'个回复&nbsp'"></span>
-                        <span th:text="'&bull;&nbsp'+${posting.like_count}+'个赞&nbsp'"></span>
-                        <span th:text="'&bull;&nbsp'+${posting.dislike_count}+'个踩&nbsp'"></span>
-                        <span th:text="'&bull;&nbsp'+${posting.view_count}+'个浏览&nbsp'"></span>
-                        <span th:text="'&bull;&nbsp'+${#dates.format(posting.gmt_create,'yyyy-MM-dd HH:mm')}+'&nbsp'"></span>
+                        <span th:text="'&bull;&nbsp'+${posting.commentCount}+'个回复&nbsp'"></span>
+                        <span th:text="'&bull;&nbsp'+${posting.likeCount}+'个赞&nbsp'"></span>
+                        <span th:text="'&bull;&nbsp'+${posting.dislikeCount}+'个踩&nbsp'"></span>
+                        <span th:text="'&bull;&nbsp'+${posting.viewCount}+'个浏览&nbsp'"></span>
+                        <span th:text="'&bull;&nbsp'+${#dates.format(posting.gmtCreate,'yyyy-MM-dd HH:mm')}+'&nbsp'"></span>
 
                     </p>
                 </div>

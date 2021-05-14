@@ -60,7 +60,7 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.0.1</version>
+            <version>2.1.3</version>
         </dependency>
         <!--引入mybatis end-->
 
@@ -77,7 +77,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.23</version>
         </dependency>
-        <!--引入musql连接 end-->
+        <!--引入mysql连接 end-->
 
         <!--引入Lombok start-->
         <dependency>
@@ -138,28 +138,43 @@
                 <version>2.4.5</version>
             </plugin>
 
+            <!--引入mybatis generator插件 start -->
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.2</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>8.0.23</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <!--引入mybatis generator插件 end -->
 
-            <!--            &lt;!&ndash;引入flyway插件,用于数据库自动更新与其版本控制 start&ndash;&gt;-->
-            <!--            <plugin>-->
-            <!--                <groupId>org.flywaydb</groupId>-->
-            <!--                <artifactId>flyway-maven-plugin</artifactId>-->
-            <!--                <version>7.8.2</version>-->
-            <!--                &lt;!&ndash;配置连接数据库的地址,用户名,密码 start&ndash;&gt;-->
-            <!--                <configuration>-->
-            <!--                    <url>jdbc:mysql://localhost:3306/bbs</url>-->
-            <!--                    <user>root</user>-->
-            <!--                    <password>123456</password>-->
-            <!--                </configuration>-->
-            <!--                <dependencies>-->
-            <!--                    <dependency>-->
-            <!--                        <groupId>mysql</groupId>-->
-            <!--                        <artifactId>mysql-connector-java</artifactId>-->
-            <!--                        <version>8.0.23</version>-->
-            <!--                    </dependency>-->
-            <!--                </dependencies>-->
-            <!--                &lt;!&ndash;配置连接数据库的地址,用户名,密码 emd&ndash;&gt;-->
-            <!--            </plugin>-->
-            <!--            &lt;!&ndash;引入flyway插件,用于数据库自动更新与其版本控制 end&ndash;&gt;-->
+            <!--
+                                    引入flyway插件,用于数据库自动更新与其版本控制 start
+                                    <plugin>
+                                        <groupId>org.flywaydb</groupId>
+                                        <artifactId>flyway-maven-plugin</artifactId>
+                                        <version>7.8.2</version>
+                                        配置连接数据库的地址,用户名,密码 start
+                                        <configuration>
+                                            <url>jdbc:mysql://localhost:3306/bbs</url>
+                                            <user>root</user>
+                                            <password>123456</password>
+                                        </configuration>
+                                        <dependencies>
+                                            <dependency>
+                                                <groupId>mysql</groupId>
+                                                <artifactId>mysql-connector-java</artifactId>
+                                                <version>8.0.23</version>
+                                            </dependency>
+                                        </dependencies>
+                                        配置连接数据库的地址,用户名,密码 emd
+                                    </plugin>
+                                    引入flyway插件,用于数据库自动更新与其版本控制 end-->
 
 
         </plugins>

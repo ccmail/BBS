@@ -12,6 +12,7 @@ import com.zzu.bbs.dto.PostingDTO;
 import com.zzu.bbs.mapper.PostingMapper;
 import com.zzu.bbs.mapper.UserMapper;
 import com.zzu.bbs.model.Posting;
+import com.zzu.bbs.model.PostingExample;
 import com.zzu.bbs.model.User;
 import com.zzu.bbs.service.PostingService;
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +44,10 @@ public class PostingServiceImpl implements PostingService {
     @Override
     public PageInfo<PostingDTO> getPageInfo(Integer id, Integer pageStart, int pageSize) {
         PageHelper.startPage(pageStart, pageSize);
-        List<Posting> postings = postingMapper.selectAllPostingByUser(id);
+//        List<Posting> postings = postingMapper.selectAllPostingByUser(id);
+        PostingExample postingExample = new PostingExample();
+        postingExample.createCriteria().andCreatorEqualTo(id);
+        List<Posting> postings = postingMapper.selectByExample(postingExample);
         return getPostingDTOPageInfo(postings);
     }
 
@@ -60,7 +64,12 @@ public class PostingServiceImpl implements PostingService {
     public PageInfo<PostingDTO> getPageInfo(int pageNum, int pageSize) {
 
         PageHelper.startPage(pageNum, pageSize);
-        List<Posting> postings = postingMapper.selectAllPosting();
+//        List<Posting> postings = postingMapper.selectAllPosting();
+        PostingExample postingExample = new PostingExample();
+        postingExample.createCriteria();
+        List<Posting> postings = postingMapper.selectByExample(postingExample);
+
+
         return getPostingDTOPageInfo(postings);
     }
 
@@ -77,7 +86,7 @@ public class PostingServiceImpl implements PostingService {
         List<PostingDTO> postingDTOList = new ArrayList<>();
 
         for (Posting posting : postings) {
-            User user = userMapper.findById(posting.getCreator());
+            User user = userMapper.selectByPrimaryKey(posting.getCreator());
             PostingDTO postingDTO = new PostingDTO();
             BeanUtils.copyProperties(posting, postingDTO);
             postingDTO.setUser(user);
@@ -99,13 +108,18 @@ public class PostingServiceImpl implements PostingService {
         if (posting.getId() == null) {
 //            通过id判断当前帖子是否为编辑
 
-            posting.setGmt_create(System.currentTimeMillis());
-            posting.setGmt_modify(posting.getGmt_create());
-            postingMapper.create(posting);
+            posting.setGmtCreate(System.currentTimeMillis());
+            posting.setGmtModify(posting.getGmtCreate());
+//            postingMapper.create(posting);
+            postingMapper.insert(posting);
         } else {
 //            更新
-            posting.setGmt_modify(posting.getGmt_create());
-            postingMapper.update(posting);
+            posting.setGmtModify(posting.getGmtCreate());
+
+            PostingExample postingExample = new PostingExample();
+            postingExample.createCriteria().andIdEqualTo(posting.getId());
+//            postingMapper.update(posting);
+            postingMapper.updateByExampleSelective(posting,postingExample);
         }
     }
 
@@ -117,10 +131,15 @@ public class PostingServiceImpl implements PostingService {
      */
     @Override
     public PostingDTO getById(Integer id) {
-        Posting posting = postingMapper.getPostingById(id);
+
+//        Posting posting = postingMapper.getPostingById(id);
+        PostingExample postingExample = new PostingExample();
+        postingExample.createCriteria().andIdEqualTo(id);
+        List<Posting> postings = postingMapper.selectByExample(postingExample);
+        Posting posting = postings.get(0);
         PostingDTO postingDTO = new PostingDTO();
         BeanUtils.copyProperties(posting, postingDTO);
-        User user = userMapper.findById(posting.getCreator());
+        User user = userMapper.selectByPrimaryKey(posting.getCreator());
         postingDTO.setUser(user);
         return postingDTO;
     }
