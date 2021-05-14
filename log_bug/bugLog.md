@@ -119,5 +119,10 @@
 
 解决方式: 详见博客 [点这里跳转](https://blog.csdn.net/qq_45376627/article/details/114453910)
 
+12.**已解决**使用MybatisGenerator时,查询不到数据库字段为text的属性的字段.
+
+解决方式:
+    selectByExample()仅能查询较小的字段, 不能查询text等较大的字段
+
 
 

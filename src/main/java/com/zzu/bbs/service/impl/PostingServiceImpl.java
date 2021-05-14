@@ -135,7 +135,8 @@ public class PostingServiceImpl implements PostingService {
 //        Posting posting = postingMapper.getPostingById(id);
         PostingExample postingExample = new PostingExample();
         postingExample.createCriteria().andIdEqualTo(id);
-        List<Posting> postings = postingMapper.selectByExample(postingExample);
+//        List<Posting> postings = postingMapper.selectByExample(postingExample);
+        List<Posting> postings = postingMapper.selectByExampleWithBLOBs(postingExample);
         Posting posting = postings.get(0);
         PostingDTO postingDTO = new PostingDTO();
         BeanUtils.copyProperties(posting, postingDTO);
