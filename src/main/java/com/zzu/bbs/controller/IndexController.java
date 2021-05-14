@@ -35,31 +35,17 @@ public class IndexController {
     private int pageSize;
 
 
-
     @GetMapping("/")
     public String index(HttpServletRequest request,
                         Model model,
-                        @RequestParam(name = "page",defaultValue = "1")Integer pageStart) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null && cookies.length != 0) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("token")) {
-                    String token_value = cookie.getValue();
-                    User user = userMapper.findByToken(token_value);
-                    if (user != null) {
-                        request.getSession().setAttribute("user", user);
-                    }
+                        @RequestParam(name = "page", defaultValue = "1") Integer pageStart) {
 
-                    break;
-                }
-            }
-        }
 
 //用cookies检查登陆状态, 在return前进行数据查询, 获取列表信息
         PageInfo<PostingDTO> pageInfo = postingService.getPageInfo(pageStart, pageSize);
         List<PostingDTO> postingList = pageInfo.getList();
-        model.addAttribute("postings",postingList);
-        model.addAttribute("pageInfo",pageInfo);
+        model.addAttribute("postings", postingList);
+        model.addAttribute("pageInfo", pageInfo);
         return "index";
     }
 }

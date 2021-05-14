@@ -8,6 +8,7 @@ package com.zzu.bbs.service;
 
 import com.github.pagehelper.PageInfo;
 import com.zzu.bbs.dto.PostingDTO;
+import com.zzu.bbs.model.Posting;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +17,11 @@ import java.util.List;
 public interface PostingService {
 
 
-    PageInfo<PostingDTO> getPageInfo(Integer id, Integer pageStart, int pageSize) ;
+    PageInfo<PostingDTO> getPageInfo(Integer id, Integer pageStart, int pageSize);
 
     PageInfo<PostingDTO> getPageInfo(int pageNum, int pageSize);
 
+    PostingDTO getById(Integer id);
+
+    void createOrUpdate(Posting posting);
 }

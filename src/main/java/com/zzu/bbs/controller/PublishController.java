@@ -6,13 +6,16 @@ package com.zzu.bbs.controller;
  * Description:发帖页面的controller, 用get和post格式区分,get请求用于渲染页面,post请求用于提交表单进行跳转
  */
 
+import com.zzu.bbs.dto.PostingDTO;
 import com.zzu.bbs.mapper.PostingMapper;
 import com.zzu.bbs.model.Posting;
 import com.zzu.bbs.model.User;
+import com.zzu.bbs.service.PostingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,17 +28,32 @@ public class PublishController {
     @Autowired
     private PostingMapper postingMapper;
 
+    @Autowired
+    private PostingService postingService;
+
     @GetMapping("/publish")
     public String publish() {
+        return "publish";
+    }
+
+    @GetMapping("/publish/{id}")
+    public String edit(@PathVariable(name = "id") Integer id,
+                       Model model) {
+        PostingDTO posting = postingService.getById(id);
+        model.addAttribute("title", posting.getTitle());
+        model.addAttribute("description", posting.getDescription());
+        model.addAttribute("tag", posting.getTag());
+        model.addAttribute("id",posting.getId());
         return "publish";
     }
 
     //    接受前端页面返回的参数
     @PostMapping("/publish")
     public String doPublish(
-            @RequestParam("title") String title,
-            @RequestParam("description") String description,
-            @RequestParam("tag") String tag,
+            @RequestParam(value = "title",required = false) String title,
+            @RequestParam(value = "description",required = false) String description,
+            @RequestParam(value = "tag",required = false) String tag,
+            @RequestParam(value = "id",required = false) Integer id,
             HttpServletRequest request,
             Model model
     ) {
@@ -68,10 +86,11 @@ public class PublishController {
         posting.setTitle(title);
         posting.setDescription(description);
         posting.setTag(tag);
-        posting.setGmt_create(System.currentTimeMillis());
-        posting.setGmt_modify(posting.getGmt_create());
+
         posting.setCreator(user.getId());
-        postingMapper.create(posting);
+        posting.setId(id);
+
+        postingService.createOrUpdate(posting);
         return "redirect:/";
     }
 }

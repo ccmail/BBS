@@ -23,5 +23,9 @@ public interface PostingMapper {
     @Select("select * from posting where creator=#{userId}")
     List<Posting> selectAllPostingByUser(@Param("userId") Integer userId);
 
+    @Select("select * from posting where id=#{userId}")
+    Posting getPostingById(@Param("userId") Integer userId);
 
+    @Update("update posting set title=#{title},description=#{description},gmt_modify=#{gmt_modify},tag=#{tag} where id = #{id}")
+    void update(Posting posting);
 }

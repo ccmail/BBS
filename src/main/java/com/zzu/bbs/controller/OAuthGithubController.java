@@ -11,6 +11,7 @@ import com.zzu.bbs.dto.AccessTokenDTO;
 import com.zzu.bbs.dto.GithubUser;
 import com.zzu.bbs.mapper.UserMapper;
 import com.zzu.bbs.model.User;
+import com.zzu.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -23,14 +24,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
-public class OAuth_Github_Controller {
+public class OAuthGithubController {
 
     //会自动将实例化好的东西放到该变量里
     @Autowired
     private GithubProvider githubProvider;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
     @Value("${github.client.id}")
     private String client_id;
@@ -40,7 +41,6 @@ public class OAuth_Github_Controller {
 
     @Value("${github.redirect.uri}")
     private String redirect_uri;
-
 
 
     @GetMapping("/callback")
@@ -68,22 +68,20 @@ public class OAuth_Github_Controller {
         System.out.println(githubUser.getBio());
 
         //进行登录状态的判断
-        if (githubUser != null && githubUser.getId()!=null) {
+        if (githubUser != null && githubUser.getId() != null) {
             //登录成功,获取cookies和session
             User user = new User();
             String token = UUID.randomUUID().toString();
             user.setToken(token);
             user.setName(githubUser.getName());
             user.setAccount_id(String.valueOf(githubUser.getId()));
-            user.setGmt_create(System.currentTimeMillis());
-            user.setGmt_modify(user.getGmt_create());
             user.setAvatar_url(githubUser.getAvatar_url());
-            //用插入数据库的操作代替写入session,即将token写入数据库
-            userMapper.insert(user);
+
+            userService.createOrUpdate(user);
+
 
             //写入cookie,将token写入cookie
-            response.addCookie(new Cookie("token",token));
-
+            response.addCookie(new Cookie("token", token));
 
 
             request.getSession().setAttribute("user", githubUser);
@@ -98,5 +96,15 @@ public class OAuth_Github_Controller {
         }
 
 
+    }
+
+    @GetMapping("/signOut")
+    public String signOut(HttpServletRequest request,
+                          HttpServletResponse response) {
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 }

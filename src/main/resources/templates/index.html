@@ -46,7 +46,9 @@
 
                 <!--                这里用表格做可能会好点-->
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${posting.title}"></h4>
+                    <h4 class="media-heading">
+                        <a th:href="@{'/posting/'+${posting.id}}" th:text="${posting.title}"></a>
+                    </h4>
                     <p class="text-desc">
                         <!--                        这里写浏览数,回复数等信息-->
                         <span th:text="'&bull;&nbsp'+${posting.comment_count}+'个回复&nbsp'"></span>
@@ -89,8 +91,8 @@
                     <!--这里循环展示下方的页码数 end-->
 
                     <!--这里写下一页 start-->
-                    <li  th:if="${pageInfo.getNextPage()}" >
-                        <a href="#"th:href="@{/(page=${pageInfo.getNextPage()})}"
+                    <li th:if="${pageInfo.getNextPage()}">
+                        <a href="#" th:href="@{/(page=${pageInfo.getNextPage()})}"
                            aria-label="Next">
                             <span aria-hidden="true">下一页</span>
                         </a>
@@ -98,7 +100,7 @@
                     <!--这里写下一页 end-->
 
                     <!--这里写尾页 start-->
-                    <li th:if="${pageInfo.getNextPage()}" >
+                    <li th:if="${pageInfo.getNextPage()}">
                         <a href="#" th:href="@{/(page=${pageInfo.getPages()})}"
                            aria-label="Next">
                             <span aria-hidden="true">尾页</span>

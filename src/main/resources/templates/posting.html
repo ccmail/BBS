@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${posting.title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <!--引入jquery文件 start-->
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <!--引入jquery文件 end-->
+
+    <!--引入bootstrap文件 start-->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <!--引入bootstrap文件 end-->
+
+    <!--引入全局css配置文件 start-->
+    <link rel="stylesheet" href="/css/bbs.css">
+    <!--引入全局css配置文件 end-->
+</head>
+<body>
+
+<!--通过thymeleaf调用导航栏模板 start-->
+<div th:insert="navigation::nav"></div>
+<!--通过thymeleaf调用导航栏模板 end-->
+
+<!--创建流式布局 start-->
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h3>
+                <span th:text="${posting.title}">
+                </span>
+            </h3>
+
+            <!--帖子数据 start-->
+            <p class="text-desc col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <!--                        这里写浏览数,回复数等信息-->
+                <span th:text="'作者:&nbsp'+${posting.user.name}+'&nbsp'"></span>
+                <span th:text="'&#124;&nbsp'+'赞:&nbsp'+${posting.like_count}+'&nbsp'"></span>
+                <span th:text="'&#124;&nbsp'+'踩:&nbsp'+${posting.dislike_count}+'&nbsp'"></span>
+                <span th:text="'&#124;&nbsp'+'浏览数:&nbsp'+${posting.view_count}+'&nbsp'"></span>
+                <span th:text="'&#124;&nbsp'+'发布时间:&nbsp'+${#dates.format(posting.gmt_create,'yyyy-MM-dd HH:mm')}+'&nbsp'"></span>
+            </p>
+            <!--帖子数据 end-->
+
+            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <!--描述信息 start-->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${posting.description}"></div>
+            <!--描述信息 end-->
+            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+
+            <a th:href="@{'/publish/'+${posting.id}}" class="bbs-menu" th:if="${session.user!=null && session.user.id==posting.creator}">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                编辑
+            </a>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4>发起人</h4>
+                <div class="media col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object img-rounded"
+                                 th:src="${posting.user.avatar_url}"
+                            >
+                        </a>
+                    </div>
+
+                    <div class="media-body">
+                        <h5 class="media-heading">
+                            <span th:text="${posting.user.name}"></span>
+                        </h5>
+                    </div>
+
+                </div>
+                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4>相关问题</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<!--创建流式布局 end-->
+</body>
+</html>

@@ -7,10 +7,7 @@ package com.zzu.bbs.mapper;
  */
 
 import com.zzu.bbs.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
@@ -23,4 +20,10 @@ public interface UserMapper {
 
     @Select("select * from user where id=#{id}")
     User findById(@Param("id") Integer id);
+
+    @Select("select * from user where account_id=#{account_id}")
+    User findByAccountId(@Param("account_id") String account_id);
+
+    @Update("Update user set name=#{name},token=#{token},gmt_modify=#{gmt_modify},avatar_url=#{avatar_url} where id=#{id}")
+    void update(User user);
 }
