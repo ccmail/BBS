@@ -110,6 +110,11 @@ public class PostingServiceImpl implements PostingService {
 
             posting.setGmtCreate(System.currentTimeMillis());
             posting.setGmtModify(posting.getGmtCreate());
+//            刚开始创建时, 各种数量均设置为0
+            posting.setCommentCount(0);
+            posting.setDislikeCount(0);
+            posting.setLikeCount(0);
+            posting.setViewCount(0);
 //            postingMapper.create(posting);
             postingMapper.insert(posting);
         } else {
@@ -119,7 +124,7 @@ public class PostingServiceImpl implements PostingService {
             PostingExample postingExample = new PostingExample();
             postingExample.createCriteria().andIdEqualTo(posting.getId());
 //            postingMapper.update(posting);
-            postingMapper.updateByExampleSelective(posting,postingExample);
+            postingMapper.updateByExampleSelective(posting, postingExample);
         }
     }
 
