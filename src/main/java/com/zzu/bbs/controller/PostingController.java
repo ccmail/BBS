@@ -7,6 +7,8 @@ package com.zzu.bbs.controller;
  */
 
 import com.zzu.bbs.dto.PostingDTO;
+import com.zzu.bbs.exception.CustomErrorCode;
+import com.zzu.bbs.exception.CustomException;
 import com.zzu.bbs.service.PostingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,11 +23,18 @@ public class PostingController {
     private PostingService postingService;
 
     @GetMapping("posting/{id}")
-    public String posting(@PathVariable(name = "id") Integer id,
+    public String posting(@PathVariable(name = "id") String id,
                           Model model) {
-        PostingDTO postingDTO = postingService.getById(id);
-        postingService.addViewCount(id);
-        model.addAttribute("posting",postingDTO);
+        Long postingId = null;
+        try {
+            postingId = Long.parseLong(id);
+        } catch (NumberFormatException e) {
+            throw new CustomException(CustomErrorCode.INVALID_INPUT);
+        }
+
+        PostingDTO postingDTO = postingService.getById(postingId);
+        postingService.addViewCount(postingId);
+        model.addAttribute("posting", postingDTO);
         return "posting";
     }
 }

@@ -37,23 +37,23 @@ public class PublishController {
     }
 
     @GetMapping("/publish/{id}")
-    public String edit(@PathVariable(name = "id") Integer id,
+    public String edit(@PathVariable(name = "id") Long id,
                        Model model) {
         PostingDTO posting = postingService.getById(id);
         model.addAttribute("title", posting.getTitle());
         model.addAttribute("description", posting.getDescription());
         model.addAttribute("tag", posting.getTag());
-        model.addAttribute("id",posting.getId());
+        model.addAttribute("id", posting.getId());
         return "publish";
     }
 
     //    接受前端页面返回的参数
     @PostMapping("/publish")
     public String doPublish(
-            @RequestParam(value = "title",required = false) String title,
-            @RequestParam(value = "description",required = false) String description,
-            @RequestParam(value = "tag",required = false) String tag,
-            @RequestParam(value = "id",required = false) Integer id,
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "description", required = false) String description,
+            @RequestParam(value = "tag", required = false) String tag,
+            @RequestParam(value = "id", required = false) Long id,
             HttpServletRequest request,
             Model model
     ) {

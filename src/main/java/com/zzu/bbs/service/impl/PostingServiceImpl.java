@@ -48,7 +48,7 @@ public class PostingServiceImpl implements PostingService {
      */
     @NotNull
     @Override
-    public PageInfo<PostingDTO> getPageInfo(Integer id, Integer pageStart, int pageSize) {
+    public PageInfo<PostingDTO> getPageInfo(Long id, Integer pageStart, int pageSize) {
         PageHelper.startPage(pageStart, pageSize);
 //        List<Posting> postings = postingMapper.selectAllPostingByUser(id);
         PostingExample postingExample = new PostingExample();
@@ -150,7 +150,7 @@ public class PostingServiceImpl implements PostingService {
      * @return 帖子的具体信息
      */
     @Override
-    public PostingDTO getById(Integer id) {
+    public PostingDTO getById(Long id) {
 
 //        Posting posting = postingMapper.getPostingById(id);
         PostingExample postingExample = new PostingExample();
@@ -171,7 +171,7 @@ public class PostingServiceImpl implements PostingService {
     }
 
     @Override
-    public void addViewCount(Integer id) {
+    public void addViewCount(Long id) {
 
         Posting posting = new Posting();
         posting.setId(id);

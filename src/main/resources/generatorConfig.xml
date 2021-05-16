@@ -44,6 +44,15 @@
         <table tableName="comment" domainObjectName="Comment">
             <columnOverride column="UNSIGNED_BIGINT_FIELD" javaType="java.lang.Object" jdbcType="LONG"/>
         </table>
+        <table tableName="notification" domainObjectName="Notification">
+            <columnOverride column="UNSIGNED_BIGINT_FIELD" javaType="java.lang.Object" jdbcType="LONG"/>
+        </table>
+        <table tableName="nav" domainObjectName="Nav">
+            <columnOverride column="UNSIGNED_BIGINT_FIELD" javaType="java.lang.Object" jdbcType="LONG"/>
+        </table>
+        <table tableName="ad" domainObjectName="Ad">
+            <columnOverride column="UNSIGNED_BIGINT_FIELD" javaType="java.lang.Object" jdbcType="LONG"/>
+        </table>
 
 
     </context>

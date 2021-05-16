@@ -17,13 +17,13 @@ import java.util.List;
 public interface PostingService {
 
 
-    PageInfo<PostingDTO> getPageInfo(Integer id, Integer pageStart, int pageSize);
+    PageInfo<PostingDTO> getPageInfo(Long id, Integer pageStart, int pageSize);
 
     PageInfo<PostingDTO> getPageInfo(int pageNum, int pageSize);
 
-    PostingDTO getById(Integer id);
+    PostingDTO getById(Long id);
 
     void createOrUpdate(Posting posting);
 
-    void addViewCount(Integer id);
+    void addViewCount(Long id);
 }
