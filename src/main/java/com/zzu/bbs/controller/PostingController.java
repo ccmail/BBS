@@ -24,6 +24,7 @@ public class PostingController {
     public String posting(@PathVariable(name = "id") Integer id,
                           Model model) {
         PostingDTO postingDTO = postingService.getById(id);
+        postingService.addViewCount(id);
         model.addAttribute("posting",postingDTO);
         return "posting";
     }

@@ -24,4 +24,6 @@ public interface PostingService {
     PostingDTO getById(Integer id);
 
     void createOrUpdate(Posting posting);
+
+    void addViewCount(Integer id);
 }

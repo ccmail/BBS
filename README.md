@@ -6,3 +6,5 @@
 ## 我遇到的问题
 [bug记录文档](./log_bug/bugLog.md)
 
+##需要执行的mybatisGenerator的语句
+mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate

@@ -11,6 +11,7 @@ import com.github.pagehelper.PageInfo;
 import com.zzu.bbs.dto.PostingDTO;
 import com.zzu.bbs.exception.CustomErrorCode;
 import com.zzu.bbs.exception.CustomException;
+import com.zzu.bbs.mapper.PostingExtMapper;
 import com.zzu.bbs.mapper.PostingMapper;
 import com.zzu.bbs.mapper.UserMapper;
 import com.zzu.bbs.model.Posting;
@@ -24,7 +25,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 @Service
 public class PostingServiceImpl implements PostingService {
@@ -34,6 +34,9 @@ public class PostingServiceImpl implements PostingService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private PostingExtMapper postingExtMapper;
 
     /**
      * 个人中心页使用, 展示根据id查到的帖子
@@ -154,7 +157,7 @@ public class PostingServiceImpl implements PostingService {
         postingExample.createCriteria().andIdEqualTo(id);
 //        List<Posting> postings = postingMapper.selectByExample(postingExample);
         List<Posting> postings = postingMapper.selectByExampleWithBLOBs(postingExample);
-        if (postings.size()==0) {
+        if (postings.size() == 0) {
             throw new CustomException(CustomErrorCode.QUESTION_NOT_FOUND);
 
         }
@@ -165,5 +168,14 @@ public class PostingServiceImpl implements PostingService {
         User user = userMapper.selectByPrimaryKey(posting.getCreator());
         postingDTO.setUser(user);
         return postingDTO;
+    }
+
+    @Override
+    public void addViewCount(Integer id) {
+
+        Posting posting = new Posting();
+        posting.setId(id);
+        posting.setViewCount(1);
+        postingExtMapper.addViewCount(posting);
     }
 }
