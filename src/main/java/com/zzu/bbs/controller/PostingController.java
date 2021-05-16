@@ -7,7 +7,6 @@ package com.zzu.bbs.controller;
  */
 
 import com.zzu.bbs.dto.PostingDTO;
-import com.zzu.bbs.mapper.PostingMapper;
 import com.zzu.bbs.service.PostingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -9,6 +9,8 @@ package com.zzu.bbs.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zzu.bbs.dto.PostingDTO;
+import com.zzu.bbs.exception.CustomErrorCode;
+import com.zzu.bbs.exception.CustomException;
 import com.zzu.bbs.mapper.PostingMapper;
 import com.zzu.bbs.mapper.UserMapper;
 import com.zzu.bbs.model.Posting;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 @Service
 public class PostingServiceImpl implements PostingService {
@@ -110,21 +113,30 @@ public class PostingServiceImpl implements PostingService {
 
             posting.setGmtCreate(System.currentTimeMillis());
             posting.setGmtModify(posting.getGmtCreate());
-//            刚开始创建时, 各种数量均设置为0
-            posting.setCommentCount(0);
-            posting.setDislikeCount(0);
-            posting.setLikeCount(0);
-            posting.setViewCount(0);
 //            postingMapper.create(posting);
             postingMapper.insert(posting);
         } else {
+            //扔异常
+            Posting dbPosting = postingMapper.selectByPrimaryKey(posting.getId());
+            if (dbPosting == null) {
+                throw new CustomException(CustomErrorCode.QUESTION_NOT_FOUND);
+            }
+
+            if (dbPosting.getCreator().longValue() != posting.getCreator().longValue()) {
+                throw new CustomException(CustomErrorCode.INVALID_OPERATION);
+            }
+
 //            更新
             posting.setGmtModify(posting.getGmtCreate());
 
             PostingExample postingExample = new PostingExample();
             postingExample.createCriteria().andIdEqualTo(posting.getId());
 //            postingMapper.update(posting);
-            postingMapper.updateByExampleSelective(posting, postingExample);
+            int updated = postingMapper.updateByExampleSelective(posting, postingExample);
+            if (updated != 1) {
+                throw new CustomException(CustomErrorCode.QUESTION_NOT_FOUND);
+            }
+
         }
     }
 
@@ -142,7 +154,12 @@ public class PostingServiceImpl implements PostingService {
         postingExample.createCriteria().andIdEqualTo(id);
 //        List<Posting> postings = postingMapper.selectByExample(postingExample);
         List<Posting> postings = postingMapper.selectByExampleWithBLOBs(postingExample);
+        if (postings.size()==0) {
+            throw new CustomException(CustomErrorCode.QUESTION_NOT_FOUND);
+
+        }
         Posting posting = postings.get(0);
+
         PostingDTO postingDTO = new PostingDTO();
         BeanUtils.copyProperties(posting, postingDTO);
         User user = userMapper.selectByPrimaryKey(posting.getCreator());
