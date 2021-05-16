@@ -41,6 +41,9 @@
         <table tableName="posting" domainObjectName="Posting">
             <columnOverride column="UNSIGNED_BIGINT_FIELD" javaType="java.lang.Object" jdbcType="LONG"/>
         </table>
+        <table tableName="comment" domainObjectName="Comment">
+            <columnOverride column="UNSIGNED_BIGINT_FIELD" javaType="java.lang.Object" jdbcType="LONG"/>
+        </table>
 
 
     </context>

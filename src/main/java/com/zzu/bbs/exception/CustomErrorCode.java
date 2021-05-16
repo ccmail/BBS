@@ -19,7 +19,7 @@ public enum CustomErrorCode implements  ICustomErrorCode{
     FILE_UPLOAD_FAIL(2010, "图片上传失败"),
     INVALID_INPUT(2011, "非法输入"),
     INVALID_OPERATION(2012, "兄弟，是不是走错房间了？"),
-    INVALID_REQUEST(0x11,"请求出错了");
+    INVALID_REQUEST(2013,"请求出错了");
 
 
     private String message;
