@@ -8,3 +8,5 @@
 
 ##需要执行的mybatisGenerator的语句
 mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
+
+# testing
